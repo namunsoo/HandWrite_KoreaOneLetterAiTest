@@ -24,6 +24,7 @@
     <Compile Include="FileMove.py" />
     <Compile Include="FileRearrange.py" />
     <Compile Include="Main.py" />
+    <Compile Include="Test.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />

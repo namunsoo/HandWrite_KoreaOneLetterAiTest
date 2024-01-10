@@ -36,14 +36,16 @@ if __name__ == "__main__":
     outPut = len(train_ds.class_names)
 
     model = Sequential([
-        layers.Rescaling(1./255, input_shape=(img_width, img_height, 1)),
-        layers.Conv2D(48, (3, 3), activation='relu'),
+        layers.Rescaling(1./255, input_shape=(56, 56, 1)),
+        layers.Conv2D(16, (3, 3), activation='relu'),
         layers.MaxPooling2D(),
-        layers.Conv2D(96, (3, 3), activation='relu'),
+        layers.Conv2D(32, (3, 3), activation='relu'),
+        layers.MaxPooling2D(),
+        layers.Conv2D(64, (3, 3), activation='relu'),
         layers.MaxPooling2D(),
         layers.Dropout(0.2),
         layers.Flatten(),
-        layers.Dense(outPut)
+        layers.Dense(11172)
     ])
 
     model.compile(optimizer=keras.optimizers.Adam(),
@@ -59,4 +61,4 @@ if __name__ == "__main__":
             validation_data=val_ds,
             epochs=1
         )
-        model.save('my_model_epochs_'+str(i)+'.keras')
+        model.save('my_model_epochs_test_'+str(i)+'.keras')
