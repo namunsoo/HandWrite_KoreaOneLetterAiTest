@@ -14,6 +14,7 @@ if __name__ == "__main__":
     imageFolder = 'C:\\Users\\namunsoo\\Downloads\\AI_Data\\OneLetter\\'
     jsonData = 'C:\\Users\\namunsoo\\Downloads\\AI_Data\\handwriting_data_info_clean.json'
     bytesEncoded = None
+    textUnicode = None
     byteArray = None
     folderName = None
     count = 0;
@@ -22,10 +23,22 @@ if __name__ == "__main__":
         for item in jsonData['annotations']:
             if item['attributes']['type'] == '글자(음절)':
                 
-                # keras image_dataset_from_directory 여기서 한글 인식 못함
-                bytesEncoded = item['text'].encode(encoding='utf-8')
-                byteArray = list(bytesEncoded)
-                folderName = ','.join(str(e) for e in byteArray)
+                # # 초성
+                # textUnicode = ord(item['text'])
+                # folderName = str(int(((textUnicode - 0xAC00) / 28) / 21))
+                
+                # 중성
+                textUnicode = ord(item['text'])
+                folderName = str(int(((textUnicode - 0xAC00) / 28) % 21))
+                
+                # # 종성
+                # textUnicode = ord(item['text'])
+                # folderName = str(int((textUnicode - 0xAC00) % 28))
+                
+                # # keras image_dataset_from_directory 여기서 한글 인식 못함
+                # bytesEncoded = item['text'].encode(encoding='utf-8')
+                # byteArray = list(bytesEncoded)
+                # folderName = ','.join(str(e) for e in byteArray)
                 
                 # 폴더 있으면 옴기기만 없으면 생성후 옴기기
                 if os.path.isdir(imageFolder+folderName):

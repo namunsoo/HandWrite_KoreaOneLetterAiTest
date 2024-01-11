@@ -30,22 +30,20 @@ if __name__ == "__main__":
         seed=123, # 섞을때 시드 (만약 데이터를 다시 섞을경우에도 같은 값이면 섞은 결과도 같음)
         validation_split=0.2, # (subset both 일 경우만 사용) 전체의 20%를 확인용으로 사용
         subset="both", # 데이터 학습용인지 확인용인지 또는 둘다인지
-        crop_to_aspect_ratio=True # 이미지 가져올때 종횡비
+        crop_to_aspect_ratio=False # 이미지 가져올때 종횡비
     )
 
     outPut = len(train_ds.class_names)
 
     model = Sequential([
-        layers.Rescaling(1./255, input_shape=(56, 56, 1)),
-        layers.Conv2D(16, (3, 3), activation='relu'),
-        layers.MaxPooling2D(),
-        layers.Conv2D(32, (3, 3), activation='relu'),
-        layers.MaxPooling2D(),
-        layers.Conv2D(64, (3, 3), activation='relu'),
-        layers.MaxPooling2D(),
+        layers.Rescaling(1./255, input_shape=(img_width, img_height, 1)),
+        layers.Conv2D(64, (5, 5), activation='relu'),
+        layers.MaxPooling2D(2),
+        layers.Conv2D(128, (5, 5), activation='relu'),
+        layers.MaxPooling2D(2),
         layers.Dropout(0.2),
         layers.Flatten(),
-        layers.Dense(11172)
+        layers.Dense(outPut, activation="softmax")
     ])
 
     model.compile(optimizer=keras.optimizers.Adam(),
@@ -61,4 +59,11 @@ if __name__ == "__main__":
             validation_data=val_ds,
             epochs=1
         )
-        model.save('my_model_epochs_test_'+str(i)+'.keras')
+        model.save('my_model_korea_first_smallFeature_ep'+str(i)+'.keras')
+        
+    # model.fit(
+    #     train_ds,
+    #     validation_data=val_ds,
+    #     epochs=15
+    # )
+    # model.save('my_model_korea_first.keras')

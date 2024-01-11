@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>5018370e-9866-491f-bb55-da8043e427c0</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Main.py</StartupFile>
+    <StartupFile>Test.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,7 @@
   <ItemGroup>
     <Compile Include="FileMove.py" />
     <Compile Include="FileRearrange.py" />
+    <Compile Include="FileRearrangeRestore.py" />
     <Compile Include="Main.py" />
     <Compile Include="Test.py" />
   </ItemGroup>
