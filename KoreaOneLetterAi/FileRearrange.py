@@ -27,13 +27,13 @@ if __name__ == "__main__":
                 # textUnicode = ord(item['text'])
                 # folderName = str(int(((textUnicode - 0xAC00) / 28) / 21))
                 
-                # 중성
-                textUnicode = ord(item['text'])
-                folderName = str(int(((textUnicode - 0xAC00) / 28) % 21))
-                
-                # # 종성
+                # # 중성
                 # textUnicode = ord(item['text'])
-                # folderName = str(int((textUnicode - 0xAC00) % 28))
+                # folderName = str(int(((textUnicode - 0xAC00) / 28) % 21))
+                
+                # 종성
+                textUnicode = ord(item['text'])
+                folderName = str(int((textUnicode - 0xAC00) % 28))
                 
                 # # keras image_dataset_from_directory 여기서 한글 인식 못함
                 # bytesEncoded = item['text'].encode(encoding='utf-8')

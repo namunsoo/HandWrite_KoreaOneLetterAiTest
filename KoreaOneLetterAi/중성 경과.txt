@@ -1,0 +1,52 @@
+Found 729248 files belonging to 21 classes.
+Using 583399 files for training.
+Using 145849 files for validation.
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #
+=================================================================
+ rescaling (Rescaling)       (None, 56, 56, 1)         0
+
+ conv2d (Conv2D)             (None, 54, 54, 32)        320
+
+ max_pooling2d (MaxPooling2  (None, 27, 27, 32)        0
+ D)
+
+ conv2d_1 (Conv2D)           (None, 25, 25, 64)        18496
+
+ max_pooling2d_1 (MaxPoolin  (None, 12, 12, 64)        0
+ g2D)
+
+ conv2d_2 (Conv2D)           (None, 10, 10, 128)       73856
+
+ max_pooling2d_2 (MaxPoolin  (None, 5, 5, 128)         0
+ g2D)
+
+ dropout (Dropout)           (None, 5, 5, 128)         0
+
+ flatten (Flatten)           (None, 3200)              0
+
+ dense (Dense)               (None, 21)                67221
+
+=================================================================
+Total params: 159893 (624.58 KB)
+Trainable params: 159893 (624.58 KB)
+Non-trainable params: 0 (0.00 Byte)
+_________________________________________________________________
+C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python39_64\lib\site-packages\keras\src\backend.py:5729: UserWarning: "`sparse_categorical_crossentropy` received `from_logits=True`, but the `output` argument was produced by a Softmax activation and thus does not represent logits. Was this intended?
+  output, from_logits = _get_logits(
+570/570 [==============================] - 2597s 5s/step - loss: 1.3094 - sparse_categorical_accuracy: 0.5815 - val_loss: 0.7296 - val_sparse_categorical_accuracy: 0.7713
+570/570 [==============================] - 2537s 4s/step - loss: 0.6575 - sparse_categorical_accuracy: 0.7906 - val_loss: 0.4988 - val_sparse_categorical_accuracy: 0.8444
+570/570 [==============================] - 2561s 4s/step - loss: 0.5084 - sparse_categorical_accuracy: 0.8383 - val_loss: 0.4247 - val_sparse_categorical_accuracy: 0.8651
+570/570 [==============================] - 2539s 4s/step - loss: 0.4344 - sparse_categorical_accuracy: 0.8625 - val_loss: 0.3617 - val_sparse_categorical_accuracy: 0.8874
+570/570 [==============================] - 2524s 4s/step - loss: 0.3873 - sparse_categorical_accuracy: 0.8776 - val_loss: 0.3294 - val_sparse_categorical_accuracy: 0.8983
+570/570 [==============================] - 2528s 4s/step - loss: 0.3498 - sparse_categorical_accuracy: 0.8896 - val_loss: 0.2948 - val_sparse_categorical_accuracy: 0.9095
+570/570 [==============================] - 2527s 4s/step - loss: 0.3214 - sparse_categorical_accuracy: 0.8985 - val_loss: 0.2849 - val_sparse_categorical_accuracy: 0.9114
+570/570 [==============================] - 2521s 4s/step - loss: 0.3003 - sparse_categorical_accuracy: 0.9056 - val_loss: 0.2653 - val_sparse_categorical_accuracy: 0.9173
+570/570 [==============================] - 2518s 4s/step - loss: 0.2810 - sparse_categorical_accuracy: 0.9119 - val_loss: 0.2461 - val_sparse_categorical_accuracy: 0.9242
+570/570 [==============================] - 2525s 4s/step - loss: 0.2655 - sparse_categorical_accuracy: 0.9168 - val_loss: 0.2316 - val_sparse_categorical_accuracy: 0.9287
+570/570 [==============================] - 2533s 4s/step - loss: 0.2519 - sparse_categorical_accuracy: 0.9211 - val_loss: 0.2268 - val_sparse_categorical_accuracy: 0.9295
+570/570 [==============================] - 2486s 4s/step - loss: 0.2389 - sparse_categorical_accuracy: 0.9254 - val_loss: 0.2165 - val_sparse_categorical_accuracy: 0.9342
+570/570 [==============================] - 2528s 4s/step - loss: 0.2290 - sparse_categorical_accuracy: 0.9283 - val_loss: 0.2099 - val_sparse_categorical_accuracy: 0.9355
+570/570 [==============================] - 2521s 4s/step - loss: 0.2196 - sparse_categorical_accuracy: 0.9311 - val_loss: 0.2081 - val_sparse_categorical_accuracy: 0.9369
+570/570 [==============================] - 2586s 5s/step - loss: 0.2130 - sparse_categorical_accuracy: 0.9337 - val_loss: 0.1975 - val_sparse_categorical_accuracy: 0.9400

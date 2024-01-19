@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
 import numpy as np
-import PIL
 import tensorflow as tf
+import cv2
 
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -16,54 +16,47 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 if __name__ == "__main__":
+    # # 0, 19, 6
+    # textUnicode = ord('뷔')
+    # result = 0xAC00 + (0 * 21 * 28) + (0 * 28) + 0
+    # # result_to_byte = result.to_bytes(2, byteorder='big')
+    # # result_to_byte = bytes(0xAC00)
+    # print(int(((textUnicode - 0xAC00) / 28) / 21))
+    # print(int(((textUnicode - 0xAC00) / 28) % 21))
+    # print(int((textUnicode - 0xAC00) % 28))
     
-    directory = 'C:\\Users\\namunsoo\\Downloads\\AI_Data\\OneLetter'
-    img_width = 28
-    img_height = 28
-    batch_size = 1024
-    # train_ds, val_ds = keras.utils.image_dataset_from_directory(
-    #     directory,
-    #     color_mode='grayscale', # 이미지 전처리
-    #     batch_size=batch_size, # 한번에 학습시킬 양
-    #     image_size=(img_height, img_width),
-    #     shuffle=True, # 데이터 섞을지 여부 기본값 false
-    #     seed=123, # 섞을때 시드 (만약 데이터를 다시 섞을경우에도 같은 값이면 섞은 결과도 같음)
-    #     validation_split=0.2, # (subset both 일 경우만 사용) 전체의 20%를 확인용으로 사용
-    #     subset="both", # 데이터 학습용인지 확인용인지 또는 둘다인지
-    #     crop_to_aspect_ratio=True # 이미지 가져올때 종횡비
-    # )
-
-    # outPut = len(train_ds.class_names)
-
-    model = Sequential([
-        layers.Rescaling(1./255, input_shape=(img_width, img_height, 1)),
-        layers.Conv2D(64, (5, 5), activation='relu'),
-        layers.MaxPooling2D(2),
-        layers.Conv2D(128, (5, 5), activation='relu'),
-        layers.MaxPooling2D(2),
-        layers.Dropout(0.2),
-        layers.Flatten(),
-        layers.Dense(19, activation="softmax")
-    ])
-
-    model.compile(optimizer=keras.optimizers.Adam(),
-        loss=keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-        metrics=[keras.metrics.SparseCategoricalAccuracy()])
-   
-    model.summary()
+    test_image = cv2.imread('test3.png', cv2.IMREAD_GRAYSCALE)
+    test_image = cv2.resize(test_image, (56,56), interpolation = cv2.INTER_AREA)
     
-    # # model = keras.models.load_model('my_model_epochs_1.keras')
-    # for i in range(1,16):
-    #     model.fit(
-    #         train_ds,
-    #         validation_data=val_ds,
-    #         epochs=1
-    #     )
-    #     model.save('my_model_epochs_test_'+str(i)+'.keras')
+    first_model = keras.models.load_model('my_model_korea_first_ep15.keras')
+    second_model = keras.models.load_model('my_model_korea_second_ep15.keras')
+    last_model = keras.models.load_model('my_model_korea_last_ep15.keras')
         
-    # model.fit(
-    #     train_ds,
-    #     validation_data=val_ds,
-    #     epochs=15
-    # )
-    # model.save('my_model_korea_first.keras')
+    first = first_model.predict(test_image.reshape(1,56,56,1))
+    second = second_model.predict(test_image.reshape(1,56,56,1))
+    last = last_model.predict(test_image.reshape(1,56,56,1))
+    
+    # first = first_model.predict(np.expand_dims(test_image, axis=0))
+    # second = second_model.predict(np.expand_dims(test_image, axis=0))
+    # last = last_model.predict(np.expand_dims(test_image, axis=0))
+    
+    # print(first[0])
+    # print(second[0])
+    # print(last[0])
+
+    # print(np.argmax(first[0]))
+    # print(np.argmax(second[0]))
+    # print(np.argmax(last[0]))
+    
+    # aaaa = (int)(np.argmax(first))
+    # bbbb = (int)(np.argmax(second))
+    # cccc = (int)(np.argmax(last))
+    # print(aaaa)
+    # print(bbbb)
+    # print(cccc)
+    
+    result = 0xAC00 + ((int)(np.argmax(first)) * 21 * 28) + ((int)(np.argmax(second)) * 28) + (int)(np.argmax(last))
+    print(chr(result))
+    
+    # result = 0xAC00 + (10 * 21 * 28) + (9 * 28) + 0
+    # print(chr(result))

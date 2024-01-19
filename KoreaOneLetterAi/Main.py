@@ -37,9 +37,11 @@ if __name__ == "__main__":
 
     model = Sequential([
         layers.Rescaling(1./255, input_shape=(img_width, img_height, 1)),
-        layers.Conv2D(64, (5, 5), activation='relu'),
+        layers.Conv2D(32, (3, 3), activation='relu'),
         layers.MaxPooling2D(2),
-        layers.Conv2D(128, (5, 5), activation='relu'),
+        layers.Conv2D(64, (3, 3), activation='relu'),
+        layers.MaxPooling2D(2),
+        layers.Conv2D(128, (3, 3), activation='relu'),
         layers.MaxPooling2D(2),
         layers.Dropout(0.2),
         layers.Flatten(),
@@ -59,7 +61,7 @@ if __name__ == "__main__":
             validation_data=val_ds,
             epochs=1
         )
-        model.save('my_model_korea_first_smallFeature_ep'+str(i)+'.keras')
+        model.save('my_model_korea_last_ep'+str(i)+'.keras')
         
     # model.fit(
     #     train_ds,
